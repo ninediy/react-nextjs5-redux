@@ -8,7 +8,6 @@ import Link from 'next/link'
 class Blog extends React.Component {
 
   static async getInitialProps({query, res, req, store, isServer}) {
-    // store.dispatch(addBlogContent(['Hello World Content added...']));
     console.log('from server...', query);
     return {}
   }
@@ -25,9 +24,9 @@ class Blog extends React.Component {
     let {dispatch, blog_content} = this.props;
     if (dispatch) {
       if (inputContent.value) {
-        if (blog_content.findIndex(resp => resp === inputContent.value) < 0) {
+        if (blog_content.findIndex(resp => resp === inputContent.value.trim()) < 0) {
           dispatch(addBlogContent([
-            inputContent.value, ...blog_content
+            inputContent.value.trim(), ...blog_content
           ]));
         }
         inputContent.value = '';
@@ -66,6 +65,7 @@ class Blog extends React.Component {
   }
 }
 
+// map state to prop
 Blog = withRedux(makeStore, (state) => ({foo: state.foo, blog_content: state.blog_content}))(Blog);
 
 export default Blog;

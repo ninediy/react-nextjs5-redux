@@ -25,7 +25,11 @@ const reducer = (state = default_state, action) => {
 
 // action
 export const addBlogContent = (value) => {
-  return {type: 'BLOG_CONTENT', payload: value}
+  return {type: 'BLOG_CONTENT', payload: value};
+}
+
+export const fooAction = (value) => {
+  return {type: 'FOO', payload: value};
 }
 
 export const makeStore = (initialState, options) => {
