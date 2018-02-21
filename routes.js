@@ -5,5 +5,5 @@ const routes = module.exports = require('next-routes')()
 // '/v3', page: 'v3'})
 
 routes
-    .add('about','/about')
     .add('blog', '/blog/:slug')
+    .add('auth', '/auth')

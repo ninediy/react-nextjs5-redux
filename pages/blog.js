@@ -2,8 +2,9 @@
 import React from 'react'
 import {Router} from '../routes'
 import withRedux from "next-redux-wrapper";
-import {makeStore, addBlogContent} from '../store/store'
-import Link from 'next/link'
+import {makeStore} from '../store/store';
+import {addBlogContent} from '../store/actions';
+import Link from 'next/link';
 
 class Blog extends React.Component {
 
@@ -22,15 +23,16 @@ class Blog extends React.Component {
     e.preventDefault();
 
     let {dispatch, blog_content} = this.props;
-    if (dispatch) {
-      if (inputContent.value) {
-        if (blog_content.findIndex(resp => resp === inputContent.value.trim()) < 0) {
-          dispatch(addBlogContent([
-            inputContent.value.trim(), ...blog_content
-          ]));
-        }
-        inputContent.value = '';
+    if (dispatch && inputContent.value) {
+      if (blog_content.findIndex(resp => resp === inputContent.value.trim()) < 0) {
+        dispatch(addBlogContent([
+          inputContent
+            .value
+            .trim(),
+          ...blog_content
+        ]));
       }
+      inputContent.value = '';
     }
 
   }
